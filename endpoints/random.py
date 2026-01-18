@@ -8,40 +8,40 @@ def run(minimal: bool):
     conn = database.pool.getconn()
     try:
         cur = conn.cursor(row_factory=class_row(models.Server))
-        random_server = cur.execute("SELECT * FROM servers ORDER BY RANDOM() LIMIT 1").fetchone()
+        random = cur.execute("SELECT * FROM servers ORDER BY RANDOM() LIMIT 1").fetchone()
     finally:
         database.pool.putconn(conn=conn)
 
-    if random_server is None:
+    if random is None:
         return {"error": "No servers found in database"}
 
     if minimal:
         return {
-            "address": random_server.address,
-            "port": random_server.port,
-            "version": random_server.version,
-            "country": random_server.country,
-            "lastseen": random_server.lastseen
+            "address": random.address,
+            "port": random.port,
+            "version": random.version,
+            "country": random.country,
+            "lastseen": random.lastseen
         }
 
     return {
-        "address": random_server.address,
-        "port": random_server.port,
-        "version": random_server.version,
-        "protocol": random_server.protocol,
-        "software": random_server.software,
-        "motd": random_server.motd,
-        "country": random_server.country,
-        "asn": random_server.asn,
-        "org": random_server.org,
-        "hostname": random_server.reversedns,
-        "firstseen": random_server.firstseen,
-        "lastseen": random_server.lastseen,
-        "whitelist": random_server.whitelist,
-        "cracked": random_server.cracked,
-        "enforces_secure_chat": random_server.enforces_secure_chat,
-        "prevents_reports": random_server.prevents_reports,
-        "maxplayers": random_server.maxplayers,
-        "onlineplayers": random_server.onlineplayers,
-        "icon": random_server.icon
+        "address": random.address,
+        "port": random.port,
+        "version": random.version,
+        "protocol": random.protocol,
+        "software": random.software,
+        "motd": random.motd,
+        "country": random.country,
+        "asn": random.asn,
+        "org": random.org,
+        "hostname": random.reversedns,
+        "firstseen": random.firstseen,
+        "lastseen": random.lastseen,
+        "whitelist": random.whitelist,
+        "cracked": random.cracked,
+        "enforces_secure_chat": random.enforces_secure_chat,
+        "prevents_reports": random.prevents_reports,
+        "maxplayers": random.maxplayers,
+        "onlineplayers": random.onlineplayers,
+        "icon": random.icon
     }
